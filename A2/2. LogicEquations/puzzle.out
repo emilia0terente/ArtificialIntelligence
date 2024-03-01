@@ -1,0 +1,5 @@
+interpretation( 5, [number = 1,seconds = 0], [
+    function(A, [4]),
+    function(B, [2]),
+    function(C, [1]),
+    function(D, [3])]).

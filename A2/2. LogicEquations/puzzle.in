@@ -1,0 +1,19 @@
+%You have to figure out the variables' values by solving the logic equations below.
+
+set(arithmetic).
+assign(max_models, -1).
+assign(domain_size, 5).
+
+list (distinct).
+   [0, A, B, C, D].
+end_of_list.
+
+formulas(assumptions).
+  2*D > 4.
+  A + D != 5.
+  B*D < 10.
+  C*D < 10.
+  B + D != 4.
+  C*D < 6.
+  A > C + 2.
+end_of_list.

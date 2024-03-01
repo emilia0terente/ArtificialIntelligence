@@ -1,0 +1,53 @@
+%"Who owns the fish?"
+%The Brit lives in the Red house.
+%The Swede keeps Dogs as pets.
+%The Dane drinks Tea. 
+%The Green house is exactly to the left of the White house. 
+%The owner of the Green house drinks Coffee. 
+%The person who smokes Pall Mall rears Birds. 
+%The owner of the Yellow house smokes Dunhill.
+%The man living in the centre house drinks Milk.
+%The Norwegian lives in the first house.
+%The man who smokes Blends lives next to the one who keeps Cats.
+%The man who keeps Horses lives next to the man who smokes Dunhill.
+%The man who smokes Blue Master drinks Beer.
+%The German smokes Prince.
+%The Norwegian lives next to the Blue house.
+%The man who smokes Blends has a neighbour who drinks Water.
+
+set(arithmetic).
+assign(domain_size, 5).
+assign(max_models, -1).
+
+list(distinct).
+   [Brit, Swede, Dane, German, Norwegian].   % nationalities are distinct
+   [Red, Green, White, Yellow, Blue].         % house colors are distinct
+   [Dogs, Cats, Birds, Horses, Fish].         % pets are distinct
+   [Tea, Coffee, Milk, Beer, Water].          % drinks are distinct
+   [Pall_Mall, Dunhill, Blends, Blue_Master, Prince].  % smokes are distinct
+end_of_list.
+
+formulas(assumptions). 
+   right_neighbor(x, y) <-> x + 1 = y. 
+   left_neighbor(x, y) <-> x = y + 1.
+   middle(x) <-> x = 2.
+   first(x) <-> x = 0.
+   neighbors(x, y) <-> right_neighbor(x, y) | left_neighbor(x, y). 
+
+   Brit = Red.
+   Swede = Dogs.
+   Dane = Tea.
+   left_neighbor(Green, White).
+   Green = Coffee.
+   Pall_Mall = Birds.
+   Yellow = Dunhill.
+   middle(Milk).
+   first(Norwegian).
+   neighbors(Blends, Cats).
+   neighbors(Horses, Dunhill).
+   Blue_Master = Beer.
+   German = Prince.
+   neighbors(Norwegian, Blue).
+   neighbors(Blends, Water).
+
+end_of_list.

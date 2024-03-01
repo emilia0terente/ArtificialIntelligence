@@ -1,0 +1,31 @@
+% greek logic puzzle 6X6 grid
+% Digits appear in the grid so that 
+%each appears exactly once in each row, column and main diagonals.
+%    0  1  2  3  4  5
+%    -  -  -  -  -  -
+%    -  -  -  -  -  2
+%    5  -  -  2  -  -
+%    -  -  -  -  -  -
+%    -  -  0  -  -  1
+
+assign(domain_size, 6).
+assign(max_models,-1).
+set(arithmetic).
+
+formulas(latin_square).
+    all x all y1 all y2 (f(x, y1) = f(x, y2) -> y1 = y2).
+    all x1 all x2 all y (f(x1, y) = f(x2, y) -> x1 = x2).
+    all x1 all x2 (x1 != x2 -> f(x1, x1) != f(x2, x2)). %main diagonal all digits different
+    % secondary diagonal
+    all x1 all x2 all y1 all y2 (x1 != x2 & x1+y1=5 & x2+y2=5 -> f(x1,y1) != f(x2,y2) ).
+
+end_of_list.
+
+formulas(greek_puzzle).
+
+f(0,0)=0 & f(0,1)=1 & f(0,2)=2 & f(0,3)=3 & f(0,4)=4 &f(0,5)=5.
+f(1,5)=2.
+f(2,0)=5 & f(2,3)=2.
+f(5,2)=0 & f(5,5)=1.
+
+end_of_list.

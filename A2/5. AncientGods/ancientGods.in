@@ -1,0 +1,34 @@
+%There are four Greek gods in this logic problem. 
+%You have to associate them with their respective Roman gods, weekday and domain.
+%1. Aphrodite and Ares are not Mercury.
+%2. Zeus was worshipped the day after Hermes and the day before Venus.
+%3. Ares' domain is either War or he is known as Jupiter. 
+%4. The god of poetry is either Aphrodite or worshipped on Wednesday.
+%5. Friday and Tuesday are not good days for poetry.
+%6. Jupiter's day is two days after the god of War's day.
+%7. Mercury is worshipped the day before the god of Thunder. 
+
+set(arithmetic).
+assign(domain_size, 4).
+assign(max_models, 1).
+
+list(distinct).
+  [Aphrodite, Ares, Hermes, Zeus]. %Greek
+  [Love, Poetry, Thunder, War]. %domain
+  [Mars, Mercury, Jupiter, Venus]. %roman
+  [Tuesday, Wednesday, Thursday, Friday].%weekday
+end_of_list.
+
+formulas(assumptions).
+  
+  group([Aphrodite, Ares], [Mercury]). % Grouping Aphrodite and Ares to avoid isomorphism
+  group([War, Jupiter], [Mercury]). % Grouping War and Jupiter to avoid isomorphism
+  
+  (Aphrodite != Mercury) & (War != Mercury).    %1
+  (Zeus + -1 = Hermes) & (Zeus + 1 = Venus).    %2
+  (Ares = War) | (Ares = Jupiter).              %3
+  (Poetry = Aphrodite) | (Poetry = Wednesday).  %4
+  (Friday != Poetry) & (Tuesday != Poetry). %5
+  (Jupiter + -2 = War).                     %6
+  Mercury + 1 =Thunder.                     %7
+end_of_list.
